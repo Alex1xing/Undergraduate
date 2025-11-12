@@ -1,0 +1,175 @@
+---
+title: "HW1 Basics"
+author: "Wang, Yixing"
+date: "`r format(Sys.time(), '%d %h, %Y, %I:%M %p')`"
+output: html_document
+---
+
+
+1. Insert Your codes
+2. Show your answers outside the chunk.
+3. Knit your HW and submit the html version.
+
+# 1 Introductory
+
+1. What is the name, number and date of the installed R  version on your computer?
+
+ans: R version 4.5.1 (2025-06-13)
+
+2. What is the number and date of the installed R studio version on your computer?
+
+ans:2025.05.1+513
+
+3. The function `sd` calculates the standard deviation. Calculate the standard deviation
+of the numbers 0 ,1 ,2, ..., 1000. 
+
+
+```{r}
+#insert your code, for example
+z <- 0:1000
+sd(z)
+```
+
+ans: 289.1081
+
+4. Using R, calculate $$ \frac{7x+23}{5^{6.2-5.1}} $$ when $x=-3.1$
+
+
+```{r}
+#insert your code
+x <- -3.1
+ans <- (7 * x + 23) / (5^(6.2 - 5.1))
+print(ans)
+```
+ans:0.2213484
+
+5. Using R, calculate the square root of the average of the numbers 234.5, 6.07, 88.44, and `sin (1/8) `
+
+
+```{r}
+#insert your code
+x<-c(234.5,6.07,88.44,sin(1/8))
+x
+mean(x)
+sqrt(mean(x))
+```
+
+ans:9.071035
+
+6. Find `ln 2.5`
+
+
+```{r}
+#insert your code
+ans <- log(2.5)
+print(ans)
+```
+
+ans:0.9162907
+
+7. Create an object `a1` that stores $$3^{-5} \times 4^{4}\times 6^{1/6} $$
+
+
+
+```{r}
+#insert your code
+a1 <- 3^(-5) * 4^4 * 6^(1/6)
+print(a1)
+```
+
+ans:1.420122
+
+
+8. Create a new object `a2` with the value $$ -9.3 \times 5^{-12}$$
+
+
+```{r}
+#insert your code
+a2 <- -9.3 * 5^(-12)
+print(a2)
+```
+
+ans:-3.80928e-08
+
+9. Print the values of `a1, a2` and their product without using the print command. 
+
+
+
+```{r}
+#insert your code
+a1 <- 1.420122
+a2 <- -3.80928e-08
+a1
+a2
+a1 * a2
+```
+
+
+
+10. Try the commands `pi, round(pi), round(pi, digits=4),  trunc(pi), exp(pi*1i)`. print out 16 digits of pi(use `options()` function)
+
+
+
+```{r}
+#insert your code
+pi
+round(pi)
+round(pi, digits=4)
+trunc(pi)
+exp(pi*1i)
+options(digits=16)
+pi
+```
+
+ans:
+
+11. Which of the five numbers 0, Inf, -Inf, NaN, and NA are considered not missing?
+
+ans: 
+
+12. Assign the numbers 1, 2, 3, ..., 1000 to a variable x. Calculate the inverse tangent of
+the reciprocal of x,  and assign it to a variable y. print out the sum of y. (Do not print y or x)
+
+
+
+```{r}
+#insert your code
+x <- 1:1000
+y <- atan(1 / x)
+print(sum(y))
+
+```
+
+ans:7.209896
+
+13. Which number is larger: $e^\pi$ or $\pi^e$ ?. Use R to compare them.
+
+
+```{r}
+#insert your code
+x <- exp(pi)
+y <- pi^exp(1)
+x
+y
+x>y
+
+```
+
+ans:23.14069
+ 22.45916
+  TRUE
+
+14. Your friend Pedro wants to print the string `Math 3700` to the console. He enters the following command but encounters an error. What went wrong? What should he have done instead?
+
+`print(Math 3700)`
+
+`Error: unexpected numeric constant in "print(Math 3700"`
+
+ans:Text data  must be enclosed in quotation marks.
+He should have enclosed the entire string in quotes like:
+print("Math 3700") 
+
+15. What is the result of `NA + 5`? Why do you think that is?
+
+ans:The result is NA.
+Any arithmetic operation involving (NA) results in a missing value. 

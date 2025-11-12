@@ -1,0 +1,237 @@
+---
+title: "Loops&Conditions & Functions"
+author: "Wang Yixing "
+date: " "
+output: html_document
+---
+
+No points for missing or incorrect explanation
+
+# 1
+
+Explain what does the following R script do and fill the missing word?
+
+
+```{r}
+x <- -pi #A variable x is created and assigned the value of negative pi
+# Try different values of x: 5/7,  -sqrt(9), (-2)^3
+out <- x #A second variable, out, is created and initialized with the same value as x
+if (x < 0) {
+       # Fill the missing statement
+ out <- -x #Inside the if block, the out variable is reassigned -x
+  }
+cat("The absolute value of ", x, " is ", out , "\n" )
+
+```
+
+# 2
+Explain what does the following R script do and fill
+the missing word?
+
+```{r}
+x <- -16 #A variable x is assigned the value of -16
+# Try different numbers: 25, 169, -225
+y <- ifelse(x>=0 , x, NA) #This is the core of the safety check
+
+cat("The square root of",  x, "is", sqrt(y))
+```
+
+
+# 3
+Explain what does the following R script do and fill?
+
+```{r}
+x <- c(-100, 10, 20, 30, 50, 51, 52, 53, 54, 55)#Creates a vector x containing 10 numbers
+counter <- 0 #Initializes a counter variable to 0. This will be used to keep score
+mean <- mean(x) #Calculates the average of all values in x and stores it in a variable called mean
+
+for (i in 1:length(x)){#A for loop is started to go through each element of the vector x one by one
+  
+  if(x[i] > mean){#Inside the loop, it checks if the current element (x[i]) is greater than the calculated mean
+   counter <- counter +1  # Fill the missing statement
+  }
+}
+
+cat("The number of values above the mean is", counter, "\n")
+
+```
+
+
+# Loops
+
+# 4
+
+Write a for loop that iterates over the numbers 1 to 7 and prints the cube of each number using print().
+
+```{r}
+# insert your code for the for loop
+for (num in 1:7){
+  print(num^3)
+}
+
+```
+
+# 5
+
+
+Explain what does the following loop do? 
+
+```{r}
+for (n in names(iris)) {
+  print(paste0(n, " (", nchar(n), ")"))
+}#this loop iterates through each of the column names of the built-in iris dataset. For each name, it prints the name itself, followed by the number of characters in that name, enclosed in parentheses
+```
+
+# 6
+
+
+
+Explain what does the following loop do? 
+
+```{r}
+set.seed(3)
+
+while (TRUE) {
+  x <- rnorm(1)
+  print(x)
+  if (x > 1) {
+    break
+  }
+  #This R script uses a while loop to continuously generate and print random numbers from a standard normal distribution. The loop is designed to run indefinitely until it generates a number that is greater than 1, at which point it immediately stops
+}
+```
+
+# 7
+
+
+
+Explain what does the following loop do? 
+
+```{r}
+set.seed(3)
+
+while (TRUE) {
+  x <- rnorm(1)
+  if (x < 0) {
+    next
+  }
+  print(x)
+  if (x > 1) {
+    break
+  }
+  #This loop generates random numbers, but it is designed to ignore all negative numbers. It prints only the positive (or zero) numbers it generates and stops as soon as it finds and prints a number that is greater than 1
+}
+```
+
+
+# Functions
+
+# 8.  
+
+a.  Create a function `addNumber` that accepts two inputs (X and Y) and returns the value of X + Y. Test your function by calling it with X = 5 and Y = 13 inputs.
+
+```{r}
+#inser your code
+#a.
+addNumber <- function(X,Y){
+  X + Y
+}
+result<-addNumber(5,13)
+print(result)
+```
+
+b.  Update your function so that Y has a default value. Test your function by calling it with only an X = 7 input, then try specifying a value for Y.
+
+```{r}
+# insert your code
+addNumber <- function(X,Y=10){
+  X+Y
+}
+result_default <- addNumber(X=7)
+print(result_default)
+result_override <-addNumber(X=7,Y=3)
+print(result_override)
+
+```
+
+# 9.  
+
+Create a function called `firstLast` that accepts a vector and returns the first and last values. Test your function with `X = 5:13`
+
+```{r}
+# insert your code
+firstLast <- function(input_vector){
+  first_value <-input_vector[1]
+  last_value <- input_vector[length(input_vector)]
+  return(c(first_value,last_value))
+}
+X <- 5:13
+result <- firstLast(X)
+print(result)
+```
+
+# 10.
+
+Create a function called `summaryFun` that accepts a vector with option `digits = 3`; and returns the mean, median, min and max of the vector, round the output to `digits = 3`. Test your function with `X = rnorm(50)`
+
+```{r}
+# insert your code
+summaryFun <- function(x,digits = 3){
+  mean_val <- mean(x)
+  median_val <- median(x)
+  min_val <- min(x)
+  max_val <- max(x)
+
+results <- c(
+  Mean = mean_val,
+  Median = median_val,
+  Min = min_val,
+  Max = max_val
+)
+  rounded_results <- round(results, digits = digits)
+  return(rounded_results)
+}
+set.seed(123)
+X <- rnorm(50)
+summaryFun(X)
+```
+
+# 11.
+
+Write a function that takes 3 numbers a, b, and c as inputs and returns the smallest number of the three. Test your function with `c = 2, a = 1.5, b = -1`
+
+```{r}
+# insert your code
+minvalue <- function(x,y,z){
+  return(min(x, y, z))
+}
+smallest_number <- minvalue(1.5,-1,2)
+print(paste("The smallest number is:", smallest_number))
+
+```
+
+
+
+# 12.
+
+
+
+Explain what does the following loop do? 
+
+```{r}
+target <- 1e8 #Sets a target value of 10^8
+10^8
+product <- 1
+n <- 0
+while (product <= target) {#The loop stops when the product first becomes greater than the target
+  n <- n + 1
+  product <- product*n
+}#until it finds the first n where n! > 100,000,000
+n
+
+```
+
+
+
+
+

@@ -1,0 +1,122 @@
+---
+title: 'HW2: Vectors'
+author: "Wang, Yixing"
+date: "2025.9.18 "
+output: html_document
+---
+
+
+# 2 Vectors
+
+1. How would you create a vector `V` containing the values 0, 0.2,0.4,0.6,0.8, and 1, using the `seq` function?
+
+```{r}
+#insert your code
+V <- seq(from = 0, to = 1, by = 0.2)
+print(V)
+```
+
+2. Change the value 0.4 to -0.4 in vector V. Use bracket assignment
+
+```{r}
+#insert your code
+V <- seq(from = 0, to = 1, by = 0.2)
+V[3] <- -0.4
+print(V)
+```
+
+
+3. Name the elements of `V`: January, February, ...
+
+```{r}
+#insert your code
+V <- month.name
+print(V)
+```
+
+
+4. The weights of five people before and after a diet programme are given in the table.
+
+|Before |78| 72| 78| 79| 105|
+|-------|--|--|--|--|--|--|
+|After  |67| 65| 79| 70| 93|
+
+
+
+Read the `before` and `after` values into two different vectors called before
+and after. Use R to evaluate the amount of weight lost for each participant.
+What is the average amount of weight lost?
+
+
+```{r}
+#insert your code
+before <- c(78,72,78,79,105)
+after <- c(67,65,79,70,93)
+weight_lost <- before - after
+print(weight_lost)
+average_lost <- mean(weight_lost)
+print(average_lost)
+```
+
+
+5. The function `rnorm()` generates normal random variables. For instance, `rnorm(10)` gives a vector of 10 i.i.d. standard normals. Generate 20 standard normals, and store them as x. Then obtain subvectors
+of
+
+(i) the entries in x which are less than 1;
+
+(ii) the entries between -1/2 and 1;
+(iii) the entries whose absolute value is larger than 1.5.
+
+
+```{r}
+# insert your code
+x <- rnorm(20)
+x
+subvector_i <- x[x < 1]
+subvector_i
+subvector_ii <- x[x > -0.5 & x < 1]
+subvector_ii
+subvector_iii <- x[abs(x) > 1.5]
+subvector_iii
+```
+
+
+
+6. Repeat the vector `c(1,2,5, 7, 13)` twice, with each element repeated 7 times, and store the result in `xrep`. 
+Display the result sorted from largest to smallest.
+
+
+```{r}
+#insert your code
+xrep <- rep(c(1, 2, 5, 7, 13), each = 7, times = 2)
+print(xrep)
+```
+
+
+7. Use the data set `airquality`. Find 
+
+
+  a. the highest and lowest temperature
+
+  b. Number of days with temperature more than 80 
+
+
+```{r}
+#insert your code
+air <- airquality
+highest_temp <- max(air$Temp, na.rm = TRUE)
+lowest_temp <- min(air$Temp, na.rm = TRUE)
+print(highest_temp)
+print(lowest_temp)
+hot_days_count <- sum(air$Temp > 80, na.rm = TRUE)
+print(hot_days_count)
+```
+
+8. Use the function `paste`  and `:` operator to create the following character vector called `ID25`:
+ `("ID 1", "ID 2", ....., "ID 25")`
+
+```{r}
+#insert your code
+ID25 <- paste("ID", 1:25)
+print(ID25)
+``` 

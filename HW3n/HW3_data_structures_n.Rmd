@@ -1,0 +1,240 @@
+---
+title: 'HW3: R Data Structures'
+author: "Wang Yixing"
+date: " "
+output: html_document
+---
+
+
+# Matrices
+
+1. Construct and store a 4 × 2 matrix `M` that's filled row-wise with the values `4, 2.1, 3.7, 5.8, 3.1, 0.6, 1.9, and 9.5`, in that order.
+  a. Confirm the dimensions of the matrix `M` are 3 × 2 if you remove any one row.
+  b. What does R return if you delete the fourth row and the first column
+
+
+```{r}
+#insert your code
+values <- c(4, 2.1, 3.7, 5.8, 3.1, 0.6, 1.9, 9.5)
+M <- matrix(values, nrow = 4, ncol = 2, byrow = TRUE)
+dim(M[-1, ])
+result <- M[-4, -1]
+print(result)
+
+```
+
+
+2. Use R to compute the inverse of this matrix:
+  `set.seed (234)`
+  `M <- matrix ( rnorm (25) , nrow =5, ncol =5)`
+
+
+```{r}
+#insert your code
+set.seed(234)
+M <- matrix( rnorm (25) , nrow =5, ncol =5)
+M_inv <- solve(M)
+print(M_inv)
+```
+
+
+3. Suppose $$ A= \begin{pmatrix} 
+1 & 1 & 3 \\ 
+5 & 2 & 6 \\ 
+-2 & -1 & -3  
+\end{pmatrix} $$
+
+  a. Check that $$A^3=0$$
+  
+  b. Replace the second column by the product of the first and third columns
+
+
+```{r}
+#insert your code
+A <- matrix(c(1, 5, -2, 1, 2, -1, 3, 6, -3), nrow = 3, ncol = 3, byrow = FALSE)
+A_sq <- A %*% A
+A_cube <- A_sq %*% A
+print(A_cube)
+B <- A
+product_col <- B[, 1] * B[, 3]
+B[, 2] <- product_col
+print(B)
+```
+
+
+4. Let `A <- matrix (1:30 , 10)`, `B <- matrix (1:10 , 2)`, `a <- 1:3`, and ` b<- 1:5`
+
+        Compute `A+a`, `A*A`, `t(A)%*% A`, `B-b`
+
+
+```{r}
+#insert your code
+A <- matrix (1:30 , 10)
+B <- matrix (1:10 , 2)
+a <- 1:3
+b<- 1:5
+Aa <- A+a
+AA <- A*A
+tAA <- t(A) %*% A
+Bb <- B-b
+print(Aa)
+print(AA)
+print(tAA)
+print(Bb)
+```
+
+
+5. Create a 7 by 9 matrix of random integers chosen from `1, 2, . . . , 10` by executing the following two lines of code:
+
+      `set.seed(23)`
+      `M <- matrix( sample(10, size=63, replace=T), nr=7)`
+  a. What are the dimension of matrix M?
+  b. How many elemnts more than 7?
+  c. how many elements between 4 and 6 inclusive?
+  d. name the rows using the `month.name` R command and the columns by the capital letters using `LETTERS` command
+  e. print out matrix `M`
+
+
+```{r}
+#insert your code
+set.seed(23)
+M <- matrix( sample(10, size=63, replace=T), nr=7)
+print(dim(M))
+count_more_than_7 <- sum(M > 7)
+print(count_more_than_7)
+count_4_to_6_inclusive <- sum(M >= 4 & M <= 6)
+print(count_4_to_6_inclusive)
+rownames(M) <- month.name[1:7]
+colnames(M) <- LETTERS[1:9]
+print(M)
+```
+
+
+
+# Lists
+
+
+
+1. Create a list that contains, in this order, a sequence of 25 evenly
+spaced numbers between `−2 and 3`;a `3 × 3` matrix of the logical
+vector `c(T,T,F,T,F,T,F,F,T)` filled row-wise; a character vector with the two strings "Hello" and "Friend":
+   a. Extract row elements 2 and 1 of columns 2 and 3, in that order, of the logical matrix.
+   b. Obtain all values from the sequence between −2 and 3 that are greater than 1.
+   
+
+```{r}
+#insert your code
+sequence_vec <- seq(from = -2, to = 3, length.out = 25)
+logical_vec <- c(T, T, F, T, F, F, F, F, T)
+logical_matrix <- matrix(logical_vec, nrow = 3, ncol = 3, byrow = TRUE)
+char_vec <- c("Hello", "Friend")
+my_list <- list(
+  sequence = sequence_vec,
+  matrix = logical_matrix,
+  strings = char_vec
+)
+print(my_list)
+extraction_a <- my_list$matrix[c(2, 1), c(2, 3)]
+print(extraction_a)
+extraction_b <- my_list$sequence[my_list$sequence > 1]
+print(extraction_b)
+```
+
+
+#  Data Frames
+
+1. Create and store the data frame as `dframe` in your R workspace which has the ten most populous countries as of 2025 with their populations in millions (Note listed numbers are old you need to update them to get credit, round to millions) and their land areas in thousands Km(sq):
+`country = China, India,United States, Indonesia, Brazil, Pakistan, Nigeria, Bangladesh, Russia, Mexico`,
+`Population = 1420, 1368, 329, 269, 212, 204, 201, 168, 144, 132`, `Land_Area= 2973,9388,  9147, 1811, 8358, 770, 910, 130, 16376, 1943`    
+
+You need to update all population numbers to the latest published numbers from the web site:
+
+https://www.worldometers.info/world-population/population-by-country/
+
+round to integer numbers.
+
+
+   a. print the data frame `dframe`   
+   b. reorder the columns so the second will be `Land_Area` and the third is `Population`   
+   c. Make a second data frame `dframe2` for the addtional countries ranked in the top 15. 
+   d. Combine the two data frame into `df`
+   
+   e. The total world population is 8179 millions as of 2025. Create a new variable 'percent` for percentage of population of each of these included countries. 
+   e. Find the total population of these 15 countries.   
+      
+
+```{r}
+#insert your code
+country_names_10 <- c("China", "India", "United States", "Indonesia", "Brazil", "Pakistan", "Nigeria", "Bangladesh", "Russia", "Mexico")
+population_10 <- c(1416, 1464, 347, 286, 213, 255, 238, 176, 144, 132) 
+land_area_10 <- c(9388, 2973, 9147, 1811, 8358, 770, 910, 130, 16376, 1943) 
+land_area_10_original_order <- c(9388, 2973, 9147, 1811, 8358, 770, 910, 130, 16376, 1943)
+dframe <- data.frame(
+  Country = country_names_10,
+  Population = population_10,
+  Land_Area = land_area_10_original_order
+)
+print(dframe)
+dframe_reordered <- dframe[, c("Country", "Land_Area", "Population")]
+print(dframe_reordered)
+country_names_add <- c("Ethiopia", "Japan", "Egypt", "Philippines", "DR Congo")
+population_add <- c(135, 123, 118, 117, 113)
+land_area_add <- c(1104, 378, 996, 298, 2267)
+dframe2 <- data.frame(
+  Country = country_names_add,
+  Population = population_add,
+  Land_Area = land_area_add
+)
+df <- rbind(dframe, dframe2)
+print(df)
+world_pop_millions <- 8179
+percent <- round((df$Population / world_pop_millions) * 100, 2)
+print(df)
+total_pop_15 <- sum(df$Population)
+print(total_pop_15)
+```
+
+2. The built-in datasets of R includes the famous iris (flowers, not eyes)
+data collected by Anderson and analyzed by Fisher in the 1930s. Type `iris` to see
+the dataset. Create a new data frame `iris_num` that consists of the numeric columns of the
+iris dataset, and calculate the means of its columns using `apply(iris_num, 2, mean)`.  
+
+
+```{r}
+#insert your code
+iris_num <- iris[, 1:4]
+column_means <- apply(iris_num, 2, mean)
+print(column_means)
+```
+
+3. Check the built-in `mtcars` data frame. Look at the help file for `mtcars` to understand the origin of the data. Use this data frame:
+
+   a. Print only the first two rows.
+   b. Print the last 3 rows.
+   c. How many rows and columns does the data have?
+   d. Print the `mpg` column of the data.
+   e. Print the `mpg` column of the data where the corresponding `cyl` column is 6.
+   f. Print all rows of the data where `cyl` is 8.
+   g. Print all rows of the data where `mpg` is greater than 29, but only for the `mpg` and
+`cyl` columns.
+
+
+```{r}
+#insert your code
+print(head(mtcars, 2))
+cat("\n")
+print(tail(mtcars, 3))
+cat("\n")
+print(dim(mtcars))
+cat("\n")
+print(mtcars$mpg)
+cat("\n")
+mpg_cyl_6 <- mtcars$mpg[mtcars$cyl == 6]
+print(mpg_cyl_6)
+cat("\n")
+rows_cyl_8 <- mtcars[mtcars$cyl == 8, ]
+print(rows_cyl_8)
+cat("\n")
+high_mpg_subset <- mtcars[mtcars$mpg > 29, c("mpg", "cyl")]
+print(high_mpg_subset)
+```   

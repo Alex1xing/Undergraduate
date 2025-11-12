@@ -1,0 +1,193 @@
+---
+title: "HW: Data Visualization with ggplot "
+author: "Yixing Wang"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+All questions should be answered using ggplot package. Show your code and the figure in the same order. Add complete annotation to every plot( coordinate labeling and title)
+
+Load the ggplot2 and fueleconomy packages, as well as the vehicles dataset.
+
+```{r}
+library(ggplot2)
+library(fueleconomy)
+head(vehicles,2)
+```
+
+# 1.  
+Make a scatterplot of `hwy` vs. `cty`.
+
+
+```{r}
+# insert your code
+ggplot(data = vehicles, mapping = aes(x = cty, y = hwy)) +
+  geom_point()
+```
+
+# 2.  
+Convert the `cyl` column to a factor.
+
+```{r}
+library(dplyr)
+
+vehicles <- vehicles %>%
+  mutate(cyl = factor(cyl))
+
+```
+
+# 3.  
+Modify the plot from Question 1 such that the color of the dot represents `cyl` value. Set `col=cyl`. then repeat with adding the line: `scale_color_brewer(palette = "YlOrRd")`
+
+```{r}
+ggplot(data = vehicles, mapping = aes(x = cty, y = hwy, color = cyl)) +
+  geom_point() +
+  scale_color_brewer(palette = "YlOrRd")
+
+```
+
+# 4.
+There is a lot of overplotting in the plot above. Remove the color scale and modify the previous plot so that alpha = 0.1.
+
+```{r}
+ggplot(data = vehicles, mapping = aes(x = cty, y = hwy)) +
+  geom_point(alpha = 0.1)
+
+```
+
+# 5.  
+Make a histogram of year.
+
+```{r}
+ggplot(data = vehicles, mapping = aes(x = year)) +
+  geom_histogram()
+
+```
+
+# 6.
+Make a histogram of year with just 5 bins.
+
+```{r}
+ggplot(data = vehicles, mapping = aes(x = year)) +
+  geom_histogram(bins = 5)
+
+```
+
+# 7.
+For each value of cyl, make a violin plot of hwy values.
+
+```{r}
+ggplot(data = vehicles, mapping = aes(x = cyl, y = hwy)) +
+  geom_violin()
+
+```
+
+# 8.  
+For each value of cyl, make a boxplot of hwy values.
+
+```{r}
+ggplot(data = vehicles, mapping = aes(x = cyl, y = hwy)) +
+  geom_boxplot()
+
+```
+
+# 9.  
+Make a barplot to show how many cars of each type of fuel there are in the dataset. (Hint: Use the geom_bar geom.)
+
+```{r}
+ggplot(data = vehicles, mapping = aes(x = fuel)) +
+  geom_bar()
+
+```
+
+# 10. 
+Add a coord_flip() layer to the previous plot to make a horizontal barplot.
+
+```{r}
+ggplot(data = vehicles, mapping = aes(x = fuel)) +
+  geom_bar() +
+  coord_flip()
+
+```
+
+# 11. 
+Make a scatterplot of hwy vs. cty. Give axis titles and a main title to the plot to make it more interpretable.
+
+```{r}
+ggplot(data = vehicles, mapping = aes(x = cty, y = hwy)) +
+  geom_point() +
+  labs(
+    title = "Vehicle Fuel Economy: Highway vs. City MPG",
+    x = "City Miles Per Gallon (MPG)",
+    y = "Highway Miles Per Gallon (MPG)"
+  )
+
+```
+
+# 12. 
+Modify the plot above such that the color of the dot represents cyl value. Also reduce the alpha of the points to an appropriate level and introduce jitter.
+
+```{r}
+ggplot(data = vehicles, mapping = aes(x = cty, y = hwy, color = cyl)) +
+  geom_jitter(alpha = 0.3) +
+  labs(
+    title = "Vehicle Fuel Economy: Highway vs. City MPG",
+    x = "City Miles Per Gallon (MPG)",
+    y = "Highway Miles Per Gallon (MPG)",
+    color = "Cylinders"  
+  )
+
+```
+
+# 13. 
+Modify the plot above so that each value of cyl is in its own plot. (hint add: facet_wrap(\~ cyl))
+
+```{r}
+ggplot(data = vehicles, mapping = aes(x = cty, y = hwy, color = cyl)) +
+  geom_jitter(alpha = 0.3) +
+  labs(
+    title = "Fuel Economy by Number of Cylinders",
+    x = "City Miles Per Gallon (MPG)",
+    y = "Highway Miles Per Gallon (MPG)",
+    color = "Cylinders"
+  ) +
+  facet_wrap(~ cyl)
+
+```
+
+# 14. 
+While the plot above gives us a good idea of how cars with different cyl values compare with each other, a lot of the plot space is wasted. Modify the plot so that each little plot has its own x and y scale. (Hint: This website might be helpful.)
+
+```{r}
+ggplot(data = vehicles, mapping = aes(x = cty, y = hwy, color = cyl)) +
+  geom_jitter(alpha = 0.3) +
+  labs(
+    title = "Fuel Economy by Number of Cylinders (Independent Scales)",
+    x = "City Miles Per Gallon (MPG)",
+    y = "Highway Miles Per Gallon (MPG)",
+    color = "Cylinders"
+  ) +
+  
+  facet_wrap(~ cyl, scales = "free")
+
+```
+
+# 15. 
+Make a barplot to show how many cars of each type of fuel there are in the dataset. (Use the geom_bar geom.) Change the theme to ggplot’s black and white theme.
+
+```{r}
+ggplot(data = vehicles, mapping = aes(x = fuel)) +
+  geom_bar() +
+  theme_bw()
+
+```
+
+# 16. 
+Make a violin plot to show the distribution of displ for each value of drive. Overlay that with a scatterplot of displ vs. drive (with jitter and alpha).
+
+```{r}
+ggplot(data = vehicles, mapping = aes(x = drive,y=displ)) +
+  geom_violin() +
+  geom_jitter(alpha = 0.3,width = 0.2)
+
+```
