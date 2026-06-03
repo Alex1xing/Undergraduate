@@ -1,0 +1,36 @@
+target:
+  # Change this to the ticket detail page.
+  url: "https://example.com/tickets/123"
+  # Local time. Leave empty to start monitoring immediately.
+  sale_time: "2026-06-03 20:00:00"
+  timezone: "Asia/Shanghai"
+
+browser:
+  headless: false
+  # Reuse this directory so manual login cookies stay available.
+  user_data_dir: ".browser-profile"
+  slow_mo_ms: 60
+
+behavior:
+  refresh_interval_seconds: 1.2
+  max_refresh_interval_seconds: 5
+  max_attempts: 300
+  stop_before_payment: true
+  screenshot_on_success: true
+
+selectors:
+  # Fill these with selectors from the target site.
+  available_button: "text=立即购买"
+  sold_out_text: "text=缺货"
+  login_required_text: "text=登录"
+  date_option: ""
+  price_option: ""
+  quantity_increase_button: ""
+  submit_order_button: "text=提交订单"
+
+purchase:
+  quantity: 1
+
+notifications:
+  terminal_bell: true
+  success_message: "发现可购状态，请立刻人工确认订单和支付。"
